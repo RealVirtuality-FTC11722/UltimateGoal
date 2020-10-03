@@ -7,7 +7,8 @@ public class Grabber {
     public Servo servoClamp = null;
     public Servo servoLift = null;
 
-    public Grabber(){}
+    public Grabber(){ //constructor
+    }
 
     public void init (HardwareMap hwMap){
         servoClamp= hwMap.get(Servo.class, "servoClamp" );

@@ -47,9 +47,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Driver Mode - Testing", group="Testing")
+@TeleOp(name="Shoot - Testing", group="Testing")
 //@Disabled
-public class DriverMode_Testing extends LinearOpMode {
+public class Shoot_Testing extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -61,7 +61,7 @@ public class DriverMode_Testing extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        ringGary.InitTele(hardwareMap);
+        ringGary.RingThrower.init(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -70,11 +70,6 @@ public class DriverMode_Testing extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            ringGary.Drive.DriveControl(
-                    BotControls.DriveYStick(this),
-                    BotControls.DriveXStick(this),
-                    BotControls.TurnStick(this),
-                    BotControls.DriveThrottle(this));
             ringGary.RingThrower.ShooterControls(
                     BotControls.ShootTrigger(this),
                     BotControls.FlyWheelOnButton(this),

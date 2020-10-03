@@ -11,7 +11,7 @@ public class BotConfig {
     //Add components to robot build
     MecanumDrive Drive = new MecanumDrive();
     Collector Pickup = new Collector();
-    Shooter Thrower = new Shooter();
+    Shooter RingThrower = new Shooter();
     Grabber WobbleGrabber = new Grabber();
 
     //VuMarkDecoder myVuMark = new VuMarkDecoder();
@@ -34,6 +34,8 @@ public class BotConfig {
         Drive.initAuto(myNewHWMap);
         Drive.initGyro(myNewHWMap);
         Pickup.init(myNewHWMap);
+        RingThrower.init(myNewHWMap);
+        WobbleGrabber.init(myNewHWMap);
     }
     public void InitTele(HardwareMap myNewHWMap){
         //Initialize Servos first to minimize movement
@@ -44,7 +46,7 @@ public class BotConfig {
 
         Drive.initTele(myNewHWMap);
         Pickup.init(myNewHWMap);
-        Thrower.init(myNewHWMap);
+        RingThrower.init(myNewHWMap);
         WobbleGrabber.init(myNewHWMap);
         mySensors.init(myNewHWMap);
 
