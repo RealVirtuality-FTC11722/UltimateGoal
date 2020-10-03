@@ -20,17 +20,6 @@ public class BotControls {
     public static double  TurnStick(LinearOpMode op)                {return op.gamepad1.right_stick_x; }
     public static double  DriveThrottle(LinearOpMode op)            {return op.gamepad1.right_trigger;}
 
-    //Build Platform Grabber
-    public static boolean PlatformGrabButton(LinearOpMode op)      {
-        if (op.gamepad1.right_trigger > 0.500001) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //Parking Scorer
-    public static boolean ParkTrigger(LinearOpMode op)              {return op.gamepad1.right_bumper;}
 
     //GAMEPAD 2
     //Collector controls
@@ -41,11 +30,10 @@ public class BotControls {
     public static boolean SideArmDownButton(LinearOpMode op)        {return  op.gamepad2.dpad_down;}
     public static boolean SideArmUpButton(LinearOpMode op)          {return  op.gamepad2.dpad_up;}
 
-    //Builder controls
-    public static double  LifterStick(LinearOpMode op)              {return op.gamepad2.right_stick_y;}
-    public static boolean  ClosenoClampButton(LinearOpMode op)      {return op.gamepad2.right_bumper;}
-    public static boolean  OpenoClampButton(LinearOpMode op)        {return op.gamepad2.left_bumper;}
-    public static double  PlateStick(LinearOpMode op)               {return op.gamepad2.left_stick_y;}
-    public static double  KickOutButton(LinearOpMode op)            {return op.gamepad2.left_trigger;}
+    //Shooter controls
+    public static double  ShootTrigger(LinearOpMode op)              {return op.gamepad2.right_trigger;}
+    public static boolean  FlyWheelOnButton(LinearOpMode op)         {return op.gamepad2.a;}
+    public static boolean  FlyWheelOffButton(LinearOpMode op)        {return op.gamepad2.b;}
+    public static double LiftTrigger (LinearOpMode op)               {return op.gamepad2.left_trigger;}
 }
 

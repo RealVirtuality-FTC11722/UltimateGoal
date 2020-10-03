@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -57,13 +58,15 @@ public class DriverMode_Testing extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
+    //create a new robot named ringGary
+    private BotConfig ringGary = new BotConfig();
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-
+        ringGary.InitTele(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -72,7 +75,16 @@ public class DriverMode_Testing extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-
+            ringGary.Drive.DriveControl(
+                    BotControls.DriveYStick(this),
+                    BotControls.DriveXStick(this),
+                    BotControls.TurnStick(this),
+                    BotControls.DriveThrottle(this));
+            ringGary.Thrower.ShooterControls(
+                    BotControls.ShootTrigger(this),
+                    BotControls.FlyWheelOnButton(this),
+                    BotControls.FlyWheelOffButton(this),
+                    BotControls.LiftTrigger(this));
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
