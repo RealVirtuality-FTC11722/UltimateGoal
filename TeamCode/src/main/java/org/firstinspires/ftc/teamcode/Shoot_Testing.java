@@ -74,7 +74,8 @@ public class Shoot_Testing extends LinearOpMode {
                     BotControls.ShootTrigger(this),
                     BotControls.FlyWheelOnButton(this),
                     BotControls.FlyWheelOffButton(this),
-                    BotControls.LiftTrigger(this));
+                    BotControls.AimUpButton(this),
+                    BotControls.AimDownButton(this));
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

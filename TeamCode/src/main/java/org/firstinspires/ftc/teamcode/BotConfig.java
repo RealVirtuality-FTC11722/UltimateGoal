@@ -14,6 +14,7 @@ public class BotConfig {
     Shooter RingThrower = new Shooter();
     Grabber WobbleGrabber = new Grabber();
 
+
     //VuMarkDecoder myVuMark = new VuMarkDecoder();
 
     Sensors mySensors = new Sensors();
@@ -27,6 +28,7 @@ public class BotConfig {
 
         //Then initialize sensors
         mySensors.init(myNewHWMap);
+
 
         //myVuMark.init(myNewHWMap);
         //Finally initialize motors

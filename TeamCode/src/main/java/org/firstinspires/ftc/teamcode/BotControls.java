@@ -26,14 +26,14 @@ public class BotControls {
     public static boolean SpinnerInButton(LinearOpMode op)          {return  op.gamepad2.x;}
     public static boolean SpinnerOutButton(LinearOpMode op)         {return  op.gamepad2.a;}
     public static boolean SpinnerStopButton(LinearOpMode op)        {return  op.gamepad2.b;}
-    public static boolean SideCollectorButton(LinearOpMode op)      {return  op.gamepad2.y;}
-    public static boolean SideArmDownButton(LinearOpMode op)        {return  op.gamepad2.dpad_down;}
-    public static boolean SideArmUpButton(LinearOpMode op)          {return  op.gamepad2.dpad_up;}
 
     //Shooter controls
     public static double  ShootTrigger(LinearOpMode op)              {return op.gamepad2.right_trigger;}
     public static boolean  FlyWheelOnButton(LinearOpMode op)         {return op.gamepad2.a;}
     public static boolean  FlyWheelOffButton(LinearOpMode op)        {return op.gamepad2.b;}
     public static double LiftTrigger (LinearOpMode op)               {return op.gamepad2.left_trigger;}
+    public static boolean AimUpButton (LinearOpMode op)             {return op.gamepad2.dpad_up;}
+    public static boolean AimDownButton (LinearOpMode op)            {return op.gamepad2.dpad_down;}
+
 }
 

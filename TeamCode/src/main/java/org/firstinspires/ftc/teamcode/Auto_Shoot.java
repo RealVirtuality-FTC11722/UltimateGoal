@@ -29,62 +29,65 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
 /**
- * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
- * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
- * of the FTC Driver Station. When an selection is made from the menu, the corresponding OpMode
- * class is instantiated on the Robot Controller and executed.
+ * This file illustrates the concept of driving a path based on time.
+ * It uses the common Pushbot hardware class to define the drive on the robot.
+ * The code is structured as a LinearOpMode
  *
- * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
- * It includes all the skeletal structure that all linear OpModes contain.
+ * The code assumes that you do NOT have encoders on the wheels,
+ *   otherwise you would use: PushbotAutoDriveByEncoder;
+ *
+ *   The desired path in this example is:
+ *   - Drive forward for 3 seconds
+ *   - Spin right for 1.3 seconds
+ *   - Drive Backwards for 1 Second
+ *   - Stop and close the claw.
+ *
+ *  The code is written in a simple form with no optimizations.
+ *  However, there are several ways that this type of sequence could be streamlined,
  *
  * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Driver Mode - Testing", group="Testing")
+@Autonomous(name="AutoTest - Shoot", group="Test")
 //@Disabled
-public class DriverMode_Testing extends LinearOpMode {
+public class Auto_Shoot extends LinearOpMode {
 
-    // Declare OpMode members.
+    /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
+
     //create a new robot named ringGary
     private BotConfig ringGary = new BotConfig();
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        ringGary.InitTele(hardwareMap);
+        //Use the Teleop initialization method
+        ringGary.RingThrower.init(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
+
+        // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
+
         runtime.reset();
-
-        // run until the end of the match (driver presses STOP)
+        telemetry.addData("Runtime: ", runtime.seconds());
+        telemetry.update();
+        ringGary.RingThrower.motorFlyWheel.setPower(1);
+        sleep(3000);
         while (opModeIsActive()) {
-
-            ringGary.Drive.DriveControl(
-                    BotControls.DriveYStick(this),
-                    BotControls.DriveXStick(this),
-                    BotControls.TurnStick(this),
-                    BotControls.DriveThrottle(this));
-            ringGary.RingThrower.ShooterControls(
-                    BotControls.ShootTrigger(this),
-                    BotControls.FlyWheelOnButton(this),
-                    BotControls.FlyWheelOffButton(this),
-                    BotControls.AimUpButton(this),
-                    BotControls.AimDownButton(this));
-
-            // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.update();
+            ringGary.RingThrower.servoPusher.setPosition(1);
+            sleep(1500);
+            ringGary.RingThrower.servoPusher.setPosition(0.08);
+            sleep(500);
         }
+
     }
 }
