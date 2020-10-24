@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.vision;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -36,7 +36,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@TeleOp
+@TeleOp(name="RingDetection - Testing", group="Testing")
 public class EasyOpenCVExample extends LinearOpMode
 {
     OpenCvInternalCamera phoneCam;
@@ -106,6 +106,7 @@ public class EasyOpenCVExample extends LinearOpMode
 
         final int FOUR_RING_THRESHOLD = 150;
         final int ONE_RING_THRESHOLD = 135;
+        int rings = 0;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
@@ -123,7 +124,7 @@ public class EasyOpenCVExample extends LinearOpMode
         int avg1;
 
         // Volatile since accessed by OpMode thread w/o synchronization
-        private volatile RingPosition position = RingPosition.FOUR;
+        public volatile RingPosition position = RingPosition.FOUR;
 
         /*
          * This function takes the RGB frame, converts to YCrCb,

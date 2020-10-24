@@ -27,9 +27,11 @@ public class Collector {
     public void CollectorControls(boolean OnButton, boolean OffButton){
         if (OnButton){
             motorDrum.setPower(0.4);
+            servoRoller.setPower(1);
         }
         if (OffButton){
             motorDrum.setPower(0);
+            servoRoller.setPower(0);
         }
     }
 

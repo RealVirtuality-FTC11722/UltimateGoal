@@ -83,9 +83,7 @@ public class Auto_Shoot extends LinearOpMode {
         ringGary.RingThrower.motorFlyWheel.setPower(1);
         sleep(3000);
         while (opModeIsActive()) {
-            ringGary.RingThrower.servoPusher.setPosition(1);
-            sleep(1500);
-            ringGary.RingThrower.servoPusher.setPosition(0.08);
+            ringGary.RingThrower.Shoot(this);
             sleep(500);
         }
 

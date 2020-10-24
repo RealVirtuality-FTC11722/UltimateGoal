@@ -23,9 +23,8 @@ public class BotControls {
 
     //GAMEPAD 2
     //Collector controls
-    public static boolean SpinnerInButton(LinearOpMode op)          {return  op.gamepad2.x;}
-    public static boolean SpinnerOutButton(LinearOpMode op)         {return  op.gamepad2.a;}
-    public static boolean SpinnerStopButton(LinearOpMode op)        {return  op.gamepad2.b;}
+    public static boolean CollectorOnButton(LinearOpMode op)          {return  op.gamepad2.x;}
+    public static boolean CollectorOffButton(LinearOpMode op)         {return  op.gamepad2.y;}
 
     //Shooter controls
     public static double  ShootTrigger(LinearOpMode op)              {return op.gamepad2.right_trigger;}
@@ -34,6 +33,11 @@ public class BotControls {
     public static double LiftTrigger (LinearOpMode op)               {return op.gamepad2.left_trigger;}
     public static boolean AimUpButton (LinearOpMode op)             {return op.gamepad2.dpad_up;}
     public static boolean AimDownButton (LinearOpMode op)            {return op.gamepad2.dpad_down;}
+
+    //Grabber Controls
+    public static boolean GrabButton (LinearOpMode op)                {return op.gamepad2.right_bumper;}
+    public static boolean ReleaseButton (LinearOpMode op)              {return op.gamepad2.left_bumper;}
+
 
 }
 

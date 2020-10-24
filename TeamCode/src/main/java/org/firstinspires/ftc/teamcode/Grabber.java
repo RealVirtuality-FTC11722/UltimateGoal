@@ -1,11 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Grabber {
     public Servo servoClamp = null;
     public Servo servoLift = null;
+    public double UP_POS = 0;
+    public double DOWN_POS = 1;
+    public double GRAB_POS =1;
+    public double RELEASE_POS =0;
 
     public Grabber(){ //constructor
     }
@@ -15,11 +20,28 @@ public class Grabber {
         servoLift = hwMap.get(Servo.class, "servoLift");
     }
 
-    public void GrabberControls(boolean ClampButton, double LiftTrigger){
+    public void GrabberControls(boolean GrabButton, boolean ReleaseButton, double LiftTrigger){
         servoLift.setPosition(LiftTrigger);
-        if (ClampButton){
-            servoClamp.setPosition(1.0);
+        if (GrabButton){
+            servoClamp.setPosition(GRAB_POS);
         }
+        if (ReleaseButton){
+            servoClamp.setPosition(RELEASE_POS);
+        }
+
         //Ask drivers how they want to release.
+    }
+
+    public void Lift(OpMode op){
+        servoLift.setPosition(UP_POS);
+    }
+    public void Lower(OpMode op){
+        servoLift.setPosition(DOWN_POS);
+    }
+    public void Grab(OpMode op){
+        servoClamp.setPosition(GRAB_POS);
+    }
+    public void Release(OpMode op){
+        servoClamp.setPosition(RELEASE_POS);
     }
 }

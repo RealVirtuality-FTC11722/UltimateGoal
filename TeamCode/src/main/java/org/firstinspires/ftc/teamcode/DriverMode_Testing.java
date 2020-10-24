@@ -81,6 +81,13 @@ public class DriverMode_Testing extends LinearOpMode {
                     BotControls.FlyWheelOffButton(this),
                     BotControls.AimUpButton(this),
                     BotControls.AimDownButton(this));
+//            ringGary.WobbleGrabber.GrabberControls(
+//                    BotControls.GrabButton(this),
+//                    BotControls.ReleaseButton(this),
+//                    BotControls.LiftTrigger(this));
+//            ringGary.Pickup.CollectorControls(
+//                    BotControls.CollectorOnButton(this),
+//                    BotControls.CollectorOffButton(this));
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

@@ -19,6 +19,7 @@ public class BotConfig {
 
     Sensors mySensors = new Sensors();
 
+
     public BotConfig() { // constructor
     }
 
@@ -33,11 +34,11 @@ public class BotConfig {
         //myVuMark.init(myNewHWMap);
         //Finally initialize motors
 
-        Drive.initAuto(myNewHWMap);
-        Drive.initGyro(myNewHWMap);
-        Pickup.init(myNewHWMap);
+        //Drive.initAuto(myNewHWMap);
+        //Drive.initGyro(myNewHWMap);
+        //Pickup.init(myNewHWMap);
         RingThrower.init(myNewHWMap);
-        WobbleGrabber.init(myNewHWMap);
+        //WobbleGrabber.init(myNewHWMap);
     }
     public void InitTele(HardwareMap myNewHWMap){
         //Initialize Servos first to minimize movement
@@ -47,10 +48,10 @@ public class BotConfig {
         //Then initialize motors
 
         Drive.initTele(myNewHWMap);
-        Pickup.init(myNewHWMap);
+        //Pickup.init(myNewHWMap);
         RingThrower.init(myNewHWMap);
-        WobbleGrabber.init(myNewHWMap);
-        mySensors.init(myNewHWMap);
+        //WobbleGrabber.init(myNewHWMap);
+        //mySensors.init(myNewHWMap);
 
     }
 

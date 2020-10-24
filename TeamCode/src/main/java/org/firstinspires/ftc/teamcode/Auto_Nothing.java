@@ -70,7 +70,7 @@ public class Auto_Nothing extends LinearOpMode {
         telemetry.update();
 
         //Use the Teleop initialization method
-        ringGary.InitAuto(hardwareMap);
+        ringGary.mySensors.init(hardwareMap);
         AutoTransitioner.transitionOnStop(this, "Driver Mode - Testing");
 
         // Wait for the game to start (driver presses PLAY)
@@ -82,6 +82,8 @@ public class Auto_Nothing extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addData("Runtime: ", runtime.seconds());
             telemetry.update();
+            telemetry.addData("Analysis", ringGary.mySensors.pipeline.getAnalysis());
+            telemetry.addData("Postion:", ringGary.mySensors.pipeline.position);
         }
 
     }
