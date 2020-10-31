@@ -33,10 +33,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.internal.system.Deadline;
-
-import java.util.concurrent.TimeUnit;
-
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -51,26 +47,21 @@ import java.util.concurrent.TimeUnit;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="Driver Mode - Testing", group="Testing")
+@TeleOp(name="Driver Mode - MAIN", group="Game")
 //@Disabled
-public class DriverMode_Testing extends LinearOpMode {
+public class DriverMode_Main extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //create a new robot named ringGary
-    //private BotConfig ringGary = new BotConfig();
-    private final static int GAMEPAD_LOCKOUT = 500;
-    Deadline gamepadRateLimit;
-    boolean State;
-
+    private BotConfig ringGary = new BotConfig();
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
 
-        //ringGary.InitTele(hardwareMap);
+        ringGary.InitTele(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -78,23 +69,29 @@ public class DriverMode_Testing extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
+            ringGary.Drive.DriveControl(
+                    BotControls.DriveYStick(this),
+                    BotControls.DriveXStick(this),
+                    BotControls.TurnStick(this),
+                    BotControls.DriveThrottle(this));
+            ringGary.RingThrower.ShooterControls(
+                    BotControls.ShootTrigger(this),
+                    BotControls.FlyWheelOnButton(this),
+                    BotControls.FlyWheelOffButton(this),
+                    BotControls.AimUpButton(this),
+                    BotControls.AimDownButton(this));
+//            ringGary.WobbleGrabber.GrabberControls(
+//                    BotControls.GrabButton(this),
+//                    BotControls.ReleaseButton(this),
+//                    BotControls.LiftTrigger(this));
+//            ringGary.Pickup.CollectorControls(
+//                    BotControls.CollectorOnButton(this),
+//                    BotControls.CollectorOffButton(this));
+
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("State:", State);
             telemetry.update();
-            handleGamepad();
-        }
-    }
-
-    protected void handleGamepad()
-    {
-        if (!gamepadRateLimit.hasExpired()) {
-            return;
-        }
-
-        if (gamepad1.a) {
-            State = !State;
-            gamepadRateLimit.reset();
         }
     }
 }
