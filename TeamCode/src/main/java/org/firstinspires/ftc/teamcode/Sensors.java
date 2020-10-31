@@ -5,10 +5,12 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
+import org.openftc.easyopencv.OpenCvWebcam;
 
 /**
  * Created by Lyesome on 2018-01-13.
@@ -16,19 +18,17 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
  */
 
 public class Sensors {
-    ColorSensor sensorColor;
-    DistanceSensor sensorDistance;
-    ModernRoboticsI2cRangeSensor bridgeSensor;
-    ModernRoboticsI2cRangeSensor blockSensor;
-    OpenCvInternalCamera phoneCam;
+    //OpenCvInternalCamera phoneCam;
+    OpenCvWebcam phoneCam;
     EasyOpenCV.SkystoneDeterminationPipeline pipeline;
 
     public Sensors(){ //constructor
     }
 
     public void init(HardwareMap myHWMap){
-        int cameraMonitorViewId = myHWMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", myHWMap.appContext.getPackageName());
-        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        //int cameraMonitorViewId = myHWMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", myHWMap.appContext.getPackageName());
+        //phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam = OpenCvCameraFactory.getInstance().createWebcam(myHWMap.get(WebcamName.class, "webcamMain"));
         pipeline = new EasyOpenCV.SkystoneDeterminationPipeline();
         phoneCam.setPipeline(pipeline);
 

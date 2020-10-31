@@ -62,6 +62,8 @@ public class DriverMode_Testing extends LinearOpMode {
     private final static int GAMEPAD_LOCKOUT = 500;
     Deadline gamepadRateLimit;
     boolean State;
+    BlinkinLedDriver myLights;
+
 
 
     @Override
@@ -69,7 +71,8 @@ public class DriverMode_Testing extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
-
+        myLights = new BlinkinLedDriver();
+        myLights.init(hardwareMap, telemetry);
         //ringGary.InitTele(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
@@ -83,6 +86,13 @@ public class DriverMode_Testing extends LinearOpMode {
             telemetry.addData("State:", State);
             telemetry.update();
             handleGamepad();
+            if (myLights.displayKind == BlinkinLedDriver.DisplayKind.AUTO) {
+                myLights.doAutoDisplay();
+            } else {
+                /*
+                 * MANUAL mode: Nothing to do, setting the pattern as a result of a gamepad event.
+                 */
+            }
         }
     }
 
@@ -93,8 +103,18 @@ public class DriverMode_Testing extends LinearOpMode {
         }
 
         if (gamepad1.a) {
-            State = !State;
+            myLights.setDisplayKind(BlinkinLedDriver.DisplayKind.MANUAL);
+            gamepadRateLimit.reset();
+        } else if (gamepad1.b) {
+            myLights.setDisplayKind(BlinkinLedDriver.DisplayKind.AUTO);
+            gamepadRateLimit.reset();
+        } else if ((myLights.displayKind == BlinkinLedDriver.DisplayKind.MANUAL) && (gamepad1.left_bumper)) {
+            myLights.pattern = myLights.pattern.previous();
+            myLights.displayPattern();
+            gamepadRateLimit.reset();
+        } else if ((myLights.displayKind == BlinkinLedDriver.DisplayKind.MANUAL) && (gamepad1.right_bumper)) {
+            myLights.pattern = myLights.pattern.next();
+            myLights.displayPattern();
             gamepadRateLimit.reset();
         }
-    }
-}
+    }}
