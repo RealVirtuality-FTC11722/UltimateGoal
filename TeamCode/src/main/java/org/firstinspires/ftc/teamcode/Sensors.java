@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 /**
@@ -19,7 +15,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
 
 public class Sensors {
     //OpenCvInternalCamera phoneCam;
-    OpenCvWebcam phoneCam;
+    OpenCvWebcam webcamName;
     EasyOpenCV.SkystoneDeterminationPipeline pipeline;
 
     public Sensors(){ //constructor
@@ -28,21 +24,22 @@ public class Sensors {
     public void init(HardwareMap myHWMap){
         //int cameraMonitorViewId = myHWMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", myHWMap.appContext.getPackageName());
         //phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
-        phoneCam = OpenCvCameraFactory.getInstance().createWebcam(myHWMap.get(WebcamName.class, "webcamMain"));
+        webcamName = OpenCvCameraFactory.getInstance().createWebcam(myHWMap.get(WebcamName.class, "Webcam 1"));
+        int cameraMonitorViewId = myHWMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", myHWMap.appContext.getPackageName());
         pipeline = new EasyOpenCV.SkystoneDeterminationPipeline();
-        phoneCam.setPipeline(pipeline);
+        webcamName.setPipeline(pipeline);
 
         // We set the viewport policy to optimized view so the preview doesn't appear 90 deg
         // out when the RC activity is in portrait. We do our actual image processing assuming
         // landscape orientation, though.
-        phoneCam.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+        webcamName.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
 
-        phoneCam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
+        webcamName.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
             public void onOpened()
             {
-                phoneCam.startStreaming(320,240, OpenCvCameraRotation.SIDEWAYS_LEFT);
+                webcamName.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
             }
         });
 
