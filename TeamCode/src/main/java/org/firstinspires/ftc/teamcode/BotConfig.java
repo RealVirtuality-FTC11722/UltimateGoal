@@ -50,7 +50,7 @@ public class BotConfig {
         Drive.initTele(myNewHWMap);
         //Pickup.init(myNewHWMap);
         RingThrower.init(myNewHWMap);
-        //WobbleGrabber.init(myNewHWMap);
+        WobbleGrabber.init(myNewHWMap);
         //mySensors.init(myNewHWMap);
 
     }

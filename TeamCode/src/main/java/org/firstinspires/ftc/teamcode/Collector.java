@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Collector {
-    public CRServo servoRoller = null;
+    public DcMotor motorRoller = null;
     public Servo servoRelease = null;
     public DcMotor motorDrum = null;
 
@@ -15,11 +15,11 @@ public class Collector {
     }
 
     public void init(HardwareMap hwMap){
-        servoRoller = hwMap.get(CRServo.class, "servoRoller");
+        motorRoller = hwMap.get(DcMotor.class, "motorRoller");
         servoRelease = hwMap.get(Servo.class, "servoRelease");
         motorDrum = hwMap.get(DcMotor.class, "motorDrum");
 
-        servoRoller.setDirection(CRServo.Direction.FORWARD);
+        motorRoller.setDirection(CRServo.Direction.FORWARD);
         servoRelease.setDirection(Servo.Direction.FORWARD);
         motorDrum.setDirection(DcMotorSimple.Direction.FORWARD);
     }
@@ -27,11 +27,11 @@ public class Collector {
     public void CollectorControls(boolean OnButton, boolean OffButton){
         if (OnButton){
             motorDrum.setPower(0.4);
-            servoRoller.setPower(1);
+            motorRoller.setPower(1);
         }
         if (OffButton){
             motorDrum.setPower(0);
-            servoRoller.setPower(0);
+            motorRoller.setPower(0);
         }
     }
 
